@@ -1,3 +1,13 @@
 This repo contains my general projects like little scripts etc.
 
+scripts:
+========
+
+ * destroy-world:
+    - Script to handle svn commits before buildfarm which compiles 
+    Pardus source packages.
+
+ * destory-world_2005
+    - Script to run pardusman which is Pardus' iso maker.
+
 Mesutcan Kurt <mesutcank at gmail dot com>
