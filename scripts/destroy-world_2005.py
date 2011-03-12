@@ -13,17 +13,11 @@ if __name__ == "__main__":
     except:
         arg = None
 
-    try:
-        arg2 = sys.argv[2]
-
-    except:
-        arg2 = None
-
     for i in ["fluxbox", "lxde", "xfce", "enlightenment", "gnome", "gnome3", \
             ".", "managers"]:
         os.system("cp -rf /var/www/localhost/htdocs/%s/*.pisi /root/pardusman/repo/" % i)
 
-    if arg2 == "sync":
+    if "sync" in sys.argv:
         os.system("wget -r -np http://pardus.comu.edu.tr/2011-devel-%s/" % \
             platform.machine())
 
@@ -31,8 +25,9 @@ if __name__ == "__main__":
 
         os.system("rm -rf /root/pardusman/repo/pardus.comu.edu.tr/")
 
-    #os.system("pisi index /root/pardusman/repo/")
-    #os.system("mv pisi-index.* /root/pardusman/repo/")
+    if "index" in sys.argv:
+        os.system("pisi index /root/pardusman/repo/")
+        os.system("mv pisi-index.* /root/pardusman/repo/")
 
     os.system("svn up /root/pardusman/distribution/")
 
