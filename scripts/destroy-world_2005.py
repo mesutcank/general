@@ -12,10 +12,13 @@ if __name__ == "__main__":
 
     except:
         arg = None
+        sys.stderr.write("ERROR: No Args Found!")
+        sys.exit(0)
 
-    for i in ["fluxbox", "lxde", "xfce", "enlightenment", "gnome", "gnome3", \
-            ".", "managers"]:
-        os.system("cp -rf /var/www/localhost/htdocs/%s/*.pisi /root/pardusman/repo/" % i)
+    if "updatePackages" in sys.argv:
+        for i in ["fluxbox", "lxde", "xfce", "enlightenment", "gnome", "gnome3", \
+                ".", "managers"]:
+            os.system("cp -rf /var/www/localhost/htdocs/%s/*.pisi /root/pardusman/repo/" % i)
 
     if "sync" in sys.argv:
         os.system("wget -r -np http://pardus.comu.edu.tr/2011-devel-%s/" % \
