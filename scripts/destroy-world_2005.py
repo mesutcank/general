@@ -34,5 +34,10 @@ if __name__ == "__main__":
 
     os.system("svn up /root/pardusman/distribution/")
 
+    os.system("rm -rf /root/pardusman/work/%s/workDir/*" % arg)
+    os.system("rm -rf /root/pardusman/work/%s/releaseNotes/*" % arg)
+
     os.system("python /root/pardusman/pardusman/pardusman.py make \
             /root/pardusman/distribution/%s/installation-%s.xml" % (arg, platform.machine()))
+
+    os.system("cp -f /root/pardusman/work/%s/workDir/*.iso /var/www/localhost/htdocs/" % arg)
