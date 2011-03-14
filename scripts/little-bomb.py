@@ -43,7 +43,7 @@ temp_pspec = '''<?xml version="1.0" ?>
         <Description>FIXME!!</Description>
         <Archive sha1sum="a" type="%(archive_type)s">%(download_address)s</Archive>
         <BuildDependencies>
-            <Dependency version="5.12.2">perl</Dependency>
+            <Dependency>xfce4-panel-devel</Dependency>
         </BuildDependencies>
         <!--
         <Patches>
@@ -55,12 +55,18 @@ temp_pspec = '''<?xml version="1.0" ?>
     <Package>
         <Name>%(package)s</Name>
         <RuntimeDependencies>
-            <Dependency version="5.12.2">perl</Dependency>
+            <Dependency>xfce4-panel</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib</Path>
-            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/libexec</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/xfce4/doc</Path>
+            <Path fileType="data">/usr/share/xfce4</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/icons</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
         </Files>
     </Package>
 
@@ -89,18 +95,15 @@ from pisi.actionsapi import get
 WorkDir = "%s-%s" % (get.srcNAME()[5:], get.srcVERSION())
 
 def setup():
-    perlmodules.configure()
+    autotools.configure()
 
 def build():
-    perlmodules.make()
-
-def check():
-    perlmodules.make("test")
+    autotools.make()
 
 def install():
-    perlmodules.install()
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    #pisitools.dodoc("Changes", "COPYRIGHT", "README")
+    pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README", "TODO")
 
 '''
 
@@ -109,7 +112,7 @@ temp_translation = '''<?xml version="1.0" ?>
     <Source>
         <Name>%(package)s</Name>
         <Summary xml:lang="tr">DUZELT</Summary>
-        <Description xml:lang="tr">%(package)s bir Perl modülüdür.</Description>
+        <Description xml:lang="tr">%(package)s bir Xfce modülüdür.</Description>
     </Source>
 </PISI>
 '''
