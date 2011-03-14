@@ -90,7 +90,7 @@ temp_actions = '''#!/usr/bin/python
 
 from pisi.actionsapi import perlmodules
 from pisi.actionsapi import get
-#from pisi.actionsapi import pisitools
+from pisi.actionsapi import pisitools
 
 WorkDir = "%s-%s" % (get.srcNAME()[5:], get.srcVERSION())
 
@@ -212,13 +212,10 @@ if __name__ == "__main__":
         sys.exit(1)
     else:
         target = sys.argv[1]
-        data["homepage"] = "http://search.cpan.org/dist/%s" % (sys.argv[1])[5:]
+        data["homepage"] = "http://goodies.xfce.org/projects/panel-plugins/%s" % (sys.argv[1])[6:]
 
         download_addr = sys.argv[2]  # TODO: will be parsed for mirrors
-        if "CPAN" in download_addr:
-            data["download_address"] = "mirrors://cpan" + download_addr.split("CPAN")[1]
-        else:
-            data["download_address"] = download_addr
+        data["download_address"] = download_addr
         data["packagedir"], data["package"] = os.path.split(target)
 
     if data["packagedir"]:
