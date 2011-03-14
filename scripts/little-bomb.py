@@ -236,7 +236,7 @@ if __name__ == "__main__":
     # Locate the version and archive_type of the package.
     version = download_addr.split("-")[-1]
     if "tar" in version:
-        if version.split(".tar")[1] == "bz2":
+        if version.split(".tar")[1] == ".bz2":
             data["archive_type"] = "tarbz2"
         else:
             data["archive_type"] = "targz"
