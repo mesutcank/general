@@ -6,7 +6,8 @@ import sys
 import platform
 
 def index_repos():
-    for i in ["fluxbox", "enlightenment", "lxde", "xfce", "gnome", "gnome3", "managers"]:
+#    for i in ["fluxbox", "enlightenment", "lxde", "xfce", "gnome", "gnome3", "managers"]:
+    for i in ["comak"]:
         if not os.path.exists("/var/www/localhost/htdocs/%s/" % i):
             os.makedirs("/var/www/localhost/htdocs/%s/" % i)
         os.system("pisi index /var/www/localhost/htdocs/%s/" % i)
@@ -91,7 +92,7 @@ if __name__ == "__main__":
     queue.close()
 
     os.system("buildfarm run")
-
+"""
     for que in queueList:
         que=que.split("\n")[0]
         que=que.split("COMAK/packages/")[1]
@@ -108,6 +109,8 @@ if __name__ == "__main__":
 
         else:
             os.system("cp -f /var/db/buildfarm/packages/COMAK/packages/%s/%s* /var/www/localhost/htdocs/" % (platform.machine(), pak_name))
+"""
+    os.system("cp -n /var/db/buildfarm/packages/COMAK/packages/%s/*.pisi /var/www/localhost/htdocs/comak" % platform.machine())
 
 
     index_repos()
