@@ -92,24 +92,25 @@ if __name__ == "__main__":
     queue.close()
 
     os.system("buildfarm run")
-"""
-    for que in queueList:
-        que=que.split("\n")[0]
-        que=que.split("COMAK/packages/")[1]
-        _pak_name = que.split("/pspec.xml")[0]
-        pak_name = _pak_name[_pak_name.rfind("/")+1:]
 
-        comp1 = que[0:que.find("/")]
-        if comp1 == "desktop":
-            comp2 = que.split("desktop/")[1]
-            comp2 = comp2[:comp2.find("/")]
-            os.system("cp -f /var/db/buildfarm/packages/COMAK/packages/%s/%s* /var/www/localhost/htdocs/%s/" % (platform.machine(), pak_name, comp2))
-        elif comp1 == "managers":
-            os.system("cp -f /var/db/buildfarm/packages/COMAK/packages/%s/%s* /var/www/localhost/htdocs/%s/" % (platform.machine(), pak_name, comp1))
 
-        else:
-            os.system("cp -f /var/db/buildfarm/packages/COMAK/packages/%s/%s* /var/www/localhost/htdocs/" % (platform.machine(), pak_name))
-"""
+#    for que in queueList:
+#        que=que.split("\n")[0]
+#        que=que.split("COMAK/packages/")[1]
+#        _pak_name = que.split("/pspec.xml")[0]
+#        pak_name = _pak_name[_pak_name.rfind("/")+1:]
+#
+#        comp1 = que[0:que.find("/")]
+#        if comp1 == "desktop":
+#            comp2 = que.split("desktop/")[1]
+#            comp2 = comp2[:comp2.find("/")]
+#            os.system("cp -f /var/db/buildfarm/packages/COMAK/packages/%s/%s* /var/www/localhost/htdocs/%s/" % (platform.machine(), pak_name, comp2))
+#        elif comp1 == "managers":
+#            os.system("cp -f /var/db/buildfarm/packages/COMAK/packages/%s/%s* /var/www/localhost/htdocs/%s/" % (platform.machine(), pak_name, comp1))
+#
+#        else:
+#            os.system("cp -f /var/db/buildfarm/packages/COMAK/packages/%s/%s* /var/www/localhost/htdocs/" % (platform.machine(), pak_name))
+#
     os.system("cp -n /var/db/buildfarm/packages/COMAK/packages/%s/*.pisi /var/www/localhost/htdocs/comak" % platform.machine())
 
 
