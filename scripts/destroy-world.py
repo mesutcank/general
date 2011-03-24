@@ -55,7 +55,7 @@ if __name__ == "__main__":
         arg = None
 
     if arg != None:
-        out = subprocess.Popen(["find /var/lib/buildfarm/repositories/COMAK/packages/%s/ \
+        out = subprocess.Popen(["find /var/lib/buildfarm/repositories/COMAK/%s/ \
                 -name pspec.xml" % arg], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         out.wait()
