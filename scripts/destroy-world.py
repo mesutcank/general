@@ -31,6 +31,8 @@ if __name__ == "__main__":
     queue.close()
 
     for i in output.split("\n"):
+        if "testing" in i:
+            continue
         i=i.strip()
         if i.endswith("pspec.xml"):
             for que in queueList:
@@ -87,9 +89,9 @@ if __name__ == "__main__":
         os.makedirs("/var/db/buildfarm/packages/COMAK/packages/%s-orig" % platform.machine())
     os.system("mv /var/db/buildfarm/packages/COMAK/packages/%s/* /var/db/buildfarm/packages/COMAK/packages/%s-orig/" % (platform.machine(), platform.machine()))
 
-    queue = open("/var/lib/buildfarm/workqueue", "r")
-    queueList = queue.readlines()
-    queue.close()
+#   queue = open("/var/lib/buildfarm/workqueue", "r")
+#   queueList = queue.readlines()
+#   queue.close()
 
     os.system("buildfarm run")
 
