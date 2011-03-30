@@ -23,6 +23,14 @@ def check_url(url):
 def get_list():
     return os.listdir(os.getcwd())
 
+def write_list_to_file():
+    fileList = open(CSYNC_FILE, "w")
+    for item in get_list().sort():
+        if item == CSYNC_FILE or item.startswith("."):
+            continue
+        fileList.write(item + "\n")
+    fileList.close()
+
 
 def main(arguments):
     url = ""
@@ -39,12 +47,8 @@ def main(arguments):
 
     if session == SESSIONS[0]:
         print "COMAK Sync: Server session is started!...\n"
-        fileList = open(CSYNC_FILE, "w")
-        for item in get_list():
-            if item == CSYNC_FILE or item.startswith("."):
-                continue
-            fileList.write(item + "\n")
-        fileList.close()
+
+        write_list_to_file()
 
         print "COMAK Sync: Server session is finished!...\n \
                 file: %s is ready." % CSYNC_FILE
@@ -69,11 +73,7 @@ def main(arguments):
                 sys.exit(1)
             print "\t\t\t\t\tDone..."
 
-
-            fileList = open(CSYNC_FILE, "w")
-            for item in get_list():
-                fileList.write(item + "\n")
-            fileList.close()
+            write_list_to_file()
 
             diff = subprocess.Popen(["diff -Nuar %s %s" % \
                     (CSYNC_FILE, CSYNC_FILE + SERVER_EXT)], shell=True, \
