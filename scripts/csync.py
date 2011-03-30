@@ -25,7 +25,13 @@ def get_list():
 
 def write_list_to_file():
     fileList = open(CSYNC_FILE, "w")
-    for item in get_list().sort():
+    items = []
+    for item in get_list():
+        items.append(item.rstrip())
+
+    items.sort()
+
+    for item in items:
         if item == CSYNC_FILE or item.startswith("."):
             continue
         fileList.write(item + "\n")
