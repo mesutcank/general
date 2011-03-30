@@ -114,6 +114,7 @@ if __name__ == "__main__":
 #            os.system("cp -f /var/db/buildfarm/packages/COMAK/packages/%s/%s* /var/www/localhost/htdocs/" % (platform.machine(), pak_name))
 #
     os.system("cp -n /var/db/buildfarm/packages/COMAK/packages/%s/*.pisi /var/www/localhost/htdocs/comak" % platform.machine())
+    os.system("cp -n /var/db/buildfarm/packages/COMAK/packages/%s/*.pisi /var/www/localhost/htdocs/repo" % platform.machine())
 
 
     index_repos()
