@@ -72,13 +72,12 @@ def main(arguments):
 
         if url != "":
             #if not check_url(url + CSYNC_FILE):
-            #    print "Couldn't find %s" % url
+            #    print "Couldn't find %s" % (url + CSYNC_FILE)
             #    sys.exit(1)
             print "Fetching %s file to get file list..." % CSYNC_FILE
             try:
                 print url + CSYNC_FILE
                 urllib.urlretrieve(url + CSYNC_FILE, CSYNC_FILE + SERVER_EXT)
-                #os.system("wget %s -O %s" % (url + CSYNC_FILE, CSYNC_FILE + SERVER_EXT))
             except:
                 print "Couldn't fetch %s... Aborting..." % CSYNC_FILE
                 sys.exit(1)
@@ -99,10 +98,11 @@ def main(arguments):
                     fileName = item.split("+")[1]
                     print "Fetching %s..." % fileName
                     try:
-                        urllib.urlretrieve(url + fileName)
-                        #os.system("wget %s" % (url + fileName))
+                        urllib.urlretrieve(url + fileName, fileName)
                     except:
                         print "Couldn't fetch %s....." % fileName
+
+            os.system("rm -f kernel-firmware-2.6.36* accessrunner-firmware-1.0-2-p11-i686.pisi aic94xx-firmware-30-2-p11-i686.pisi ar9170-firmware-0.0_20090606-3-p11-i686.pisi eagle-firmware-1.1-2-p11-i686.pisi ipw2100-firmware-1.3-3-p11-i686.pisi ipw2200-firmware-3.1-6-p11-i686.pisi iwlwifi* ql2x00-firmware-20100513-3-p11-i686.pisi radeon-rlc-firmware-1-3-p11-i686.pisi ralink-firmware-0.0_20100413-4-p11-i686.pisi v4l-conexant-firmware-0.0_20090606-2-p11-i686.pisi v4l-dvb-firmware-0.0_20100624-3-p11-i686.pisi zd12*")
 
 if __name__ == "__main__":
     main(sys.argv)
