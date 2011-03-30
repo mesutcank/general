@@ -69,9 +69,9 @@ def main(arguments):
             sys.exit(1)
 
         if url != "":
-            if not check_url(url + CSYNC_FILE):
-                print "Couldn't find %s" % url
-                sys.exit(1)
+            #if not check_url(url + CSYNC_FILE):
+            #    print "Couldn't find %s" % url
+            #    sys.exit(1)
             print "Fetching %s file to get file list..." % CSYNC_FILE
             try:
                 urllib.urlretrieve(url + CSYNC_FILE, CSYNC_FILE + SERVER_EXT)
