@@ -6,9 +6,11 @@ import urllib
 from httplib import HTTP
 from urlparse import urlparse
 import os
+import subprocess
 
 SESSIONS = ["server", "client"]
 CSYNC_FILE = "csync.list"
+SERVER_EXT = ".server"
 
 def check_url(url):
     p = urlparse(url)
@@ -74,7 +76,9 @@ def main(arguments):
             #    sys.exit(1)
             print "Fetching %s file to get file list..." % CSYNC_FILE
             try:
+                print url + CSYNC_FILE
                 urllib.urlretrieve(url + CSYNC_FILE, CSYNC_FILE + SERVER_EXT)
+                #os.system("wget %s -O %s" % (url + CSYNC_FILE, CSYNC_FILE + SERVER_EXT))
             except:
                 print "Couldn't fetch %s... Aborting..." % CSYNC_FILE
                 sys.exit(1)
@@ -90,12 +94,13 @@ def main(arguments):
 
             diffResult = diff.communicate()[0]
 
-            for item in diffResult():
+            for item in diffResult.split("\n"):
                 if item.startswith("+"):
                     fileName = item.split("+")[1]
                     print "Fetching %s..." % fileName
                     try:
                         urllib.urlretrieve(url + fileName)
+                        #os.system("wget %s" % (url + fileName))
                     except:
                         print "Couldn't fetch %s....." % fileName
 
