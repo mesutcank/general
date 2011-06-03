@@ -93,8 +93,6 @@ if __name__ == "__main__":
     queue = open("/var/lib/buildfarm/workqueue", "w")
     queue.writelines(newWorkqueue)
     queue.close()
-    sys.exit(0)
-
 
     if not os.path.exists("/var/db/buildfarm/packages/COMAK/packages/%s-orig" % platform.machine()):
         os.makedirs("/var/db/buildfarm/packages/COMAK/packages/%s-orig" % platform.machine())
