@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     if arg != None:
         out = subprocess.Popen(["find /var/lib/buildfarm/repositories/COMAK/%s/ \
-                -name pspec.xml" % arg], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                -name pspec.xml | grep -v \"gnome3\" | grep -v \"toolkit\"" % arg], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         out.wait()
 
@@ -73,8 +73,9 @@ if __name__ == "__main__":
             i=i.strip()
             if i.endswith("pspec.xml"):
                 for que in queueList:
+                    print "que: %s" % que
                     que = que.split("\n")[0]
-                    if i == que:
+                    if i == que or i.find("gnome3") != -1 or i.find("toolkit") != -1 :
                         found = True
                         break
                 if not found:
@@ -83,6 +84,16 @@ if __name__ == "__main__":
         queue = open("/var/lib/buildfarm/workqueue", "w")
         queue.writelines(queueList)
         queue.close()
+    newWorkqueue = ""
+
+    for m in open("/var/lib/buildfarm/workqueue", "r").readlines():
+        if m.find("gnome3") == -1 and m.find("toolkit") == -1:
+            newWorkqueue = newWorkqueue + m
+
+    queue = open("/var/lib/buildfarm/workqueue", "w")
+    queue.writelines(newWorkqueue)
+    queue.close()
+    sys.exit(0)
 
 
     if not os.path.exists("/var/db/buildfarm/packages/COMAK/packages/%s-orig" % platform.machine()):
