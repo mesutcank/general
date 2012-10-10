@@ -2,6 +2,8 @@
 
 if [ "$#" = "0" ]; then
 	echo "usage: $0 <repo_directory> <mirror> <distro_codename>";
+	echo ""
+	echo "example usage: ./mirror.sh /REPO/ ftp.de.debian.org wheezy"
 	exit 1;
 fi
 
