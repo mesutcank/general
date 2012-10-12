@@ -12,5 +12,10 @@ echo "Done. Listing keyrings..."
 
 gpg --list-keys --keyring trustedkeys.gpg
 
-#FIXME:
-cp /usr/share/keyrings/debian-archive-keyring.gpg $HOME/.gnupg/trustedkeys.gpg 
+if [ -e $HOME/.gnupg/trustedkeys.gpg ]; then
+	echo "Done."
+else
+	echo "Copying trustedkeys.gpg file..."
+	cp /usr/share/keyrings/debian-archive-keyring.gpg $HOME/.gnupg/trustedkeys.gpg 
+	echo "Done."
+fi
